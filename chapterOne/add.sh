@@ -1,5 +1,4 @@
 #!/bin/bash
-NAME = "Q$@"
 git add .
-git commit -m "$NAME"
+git commit -m "Q$@"
 git push -u origin
