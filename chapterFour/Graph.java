@@ -60,19 +60,6 @@ public class Graph{
             System.out.print(node.getName() + " ");
         }
     }
-    
-    public String toString(){//Demonstrates proof of concept
-        StringBuilder str = new StringBuilder();
-        for(Map.Entry<String,Node> entry : nodes.entrySet()){
-            str.append(entry.getKey() + ": ");
-            Node child = entry.getValue();
-            for(int i = 0;i < child.getChildren().size(); i++){
-                str.append(child.getChildren().get(i).getName() + " ");
-            }
-            str.append('\n');
-        }
-        return str.toString();
-    }
 }
 
 class Node{
