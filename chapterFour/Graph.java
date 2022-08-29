@@ -17,16 +17,50 @@ public class Graph{
         return nodes.get(name);
     }
 
+    public Node addNode(Node node){
+        if(!nodes.containsKey(node.getName())){
+            nodeList.add(node);
+            nodes.put(node.getName(), node);
+        }
+        return nodes.get(node.getName());
+    }
+
     public void addEdge(String src, String dest){
         Node start = addNode(src);
         Node end = addNode(dest);
         start.addNeighbour(end);
     }
 
+    public void addEdge(Node src, Node dest){
+        src.addNeighbour(dest);
+    }
+
     public ArrayList<Node> getNodes() { return nodeList; }
 
-    
+    void inOrderBST(Node node){
+        if(node != null){
+            if(node.getChildren().size() > 0) inOrderBST(node.getChildren().get(0));
+            System.out.print(node.getName() + " ");
+            if(node.getChildren().size() > 1) inOrderBST(node.getChildren().get(1));
+        }
+    }
 
+    void preOrderBST(Node node){
+        if(node != null){
+            System.out.print(node.getName() + " ");
+            if(node.getChildren().size() > 0) preOrderBST(node.getChildren().get(0));
+            if(node.getChildren().size() > 1) preOrderBST(node.getChildren().get(1));
+        }
+    }
+
+    void postOrderBST(Node node){
+        if(node != null){
+            if(node.getChildren().size() > 0) postOrderBST(node.getChildren().get(0));
+            if(node.getChildren().size() > 1) postOrderBST(node.getChildren().get(1));
+            System.out.print(node.getName() + " ");
+        }
+    }
+    
     public String toString(){//Demonstrates proof of concept
         StringBuilder str = new StringBuilder();
         for(Map.Entry<String,Node> entry : nodes.entrySet()){
@@ -52,6 +86,7 @@ class Node{
     }
 
     public void addNeighbour(Node node){
+        if(node == null) return;
         if(!map.containsKey(node.getName())){
             children.add(node);
             map.put(node.getName(), node);
